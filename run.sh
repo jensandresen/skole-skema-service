@@ -6,9 +6,10 @@ HOST_DATA_FILENAME=${2-"skole-skema-data.json"}
 
 docker build -t $APP_NAME .
 
-docker run -d \
-    -p 3001:3000 \
-    -v ${HOST_DATA_DIR}:/data \
-    -e DATAFILE="/data/${HOST_DATA_FILENAME}" \
-    --restart unless-stopped \
+docker run -d \ 
+    -p 3001:3000 \ 
+    -v ${HOST_DATA_DIR}:/data \ 
+    -e DATAFILE="/data/${HOST_DATA_FILENAME}" \ 
+    --restart unless-stopped \ 
+    --name "${APP_NAME}-app"
     $APP_NAME
