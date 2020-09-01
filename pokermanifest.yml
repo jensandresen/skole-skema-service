@@ -1,0 +1,8 @@
+version: 1
+configuration:
+  directories:
+    data: data
+  commands:
+    setup: echo setup
+    run: sh ./run.sh
+    teardown: sh ./teardown.sh
