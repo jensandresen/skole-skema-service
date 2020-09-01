@@ -3,6 +3,6 @@ configuration:
   directories:
     data: data
   commands:
-    setup: echo setup
-    run: sh ./run.sh
-    teardown: sh ./teardown.sh
+    setup: make setup
+    run: make run
+    teardown: make teardown
