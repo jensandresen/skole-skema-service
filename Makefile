@@ -17,3 +17,4 @@ run:
 
 teardown:
 	docker kill $(CONTAINER_NAME)
+	docker rm $(CONTAINER_NAME)
