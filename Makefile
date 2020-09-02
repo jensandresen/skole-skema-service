@@ -15,6 +15,6 @@ run:
 		--restart unless-stopped \
 		--name $(CONTAINER_NAME) \
 		$(SERVICE_NAME)
-
+# nothing
 teardown:
 	docker kill $(CONTAINER_NAME) 2> /dev/null
