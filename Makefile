@@ -7,6 +7,7 @@ setup:
 	docker build -t $(SERVICE_NAME) .
 
 run:
+	docker rm $(CONTAINER_NAME)
 	docker run -d \
 		-p 3001:3000 \
 		-v $(HOST_DATA_DIR):/data \
@@ -17,4 +18,3 @@ run:
 
 teardown:
 	docker kill $(CONTAINER_NAME)
-	docker rm $(CONTAINER_NAME)
