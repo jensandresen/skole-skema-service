@@ -7,7 +7,7 @@ setup:
 	docker build -t $(SERVICE_NAME) .
 
 run:
-	docker rm $(CONTAINER_NAME) 2> /dev/null
+	-docker rm $(CONTAINER_NAME)
 	docker run -d \
 		-p 3001:3000 \
 		-v $(HOST_DATA_DIR):/data \
@@ -15,6 +15,6 @@ run:
 		--restart unless-stopped \
 		--name $(CONTAINER_NAME) \
 		$(SERVICE_NAME)
-# nothing
+
 teardown:
-	docker kill $(CONTAINER_NAME) 2> /dev/null
+	-docker kill $(CONTAINER_NAME)
