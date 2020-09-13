@@ -6,6 +6,15 @@ const moment = require("moment");
 
 const dataFile = process.env.DATAFILE || path.resolve(__dirname, "./data.json");
 
+function getFileUpdatedDate(filePath) {
+  try {
+    const stats = fs.statSync(filePath);
+    return stats.mtime;
+  } catch {
+    return null;
+  }
+}
+
 function parseEvents(text) {
   const list = new Array();
   const data = ical.parseICS(text);
@@ -90,3 +99,4 @@ async function updateSchedules() {
 
 exports.updateSchedules = updateSchedules;
 exports.readSchedules = readSchedules;
+exports.getLastUpdated = () => getFileUpdatedDate(dataFile);
