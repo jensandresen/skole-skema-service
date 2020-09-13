@@ -27,15 +27,15 @@ function parseEvents(text) {
       }
     }
   }
-  
+
   return list;
 }
 
-function extractThisWeekOnly(events) {
+function extractThisWeekAndNextOnly(events) {
   const weekStart = moment.utc().day(1).startOf("day");
   const weekEnd = moment
     .utc()
-    .day(0 + 7)
+    .day(0 + 7 + 7)
     .endOf("day");
 
   return events.filter((x) => {
@@ -78,7 +78,7 @@ function downloadSchedule(fetchUrl) {
   return fetch(fetchUrl)
     .then((response) => response.text())
     .then(parseEvents)
-    .then(extractThisWeekOnly)
+    .then(extractThisWeekAndNextOnly)
     .then(sort)
     .then(transform);
 }
