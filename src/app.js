@@ -10,6 +10,11 @@ const {
 const interval = (process.env.INTERVAL || 5) * 60 * 1000;
 const port = process.env.PORT || 3000;
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 app.get("/api/schedules", async (req, res) => {
   const schedules = await readSchedules();
   res.send({
