@@ -68,6 +68,30 @@ app.get("/api/schedules/:id/today", async (req, res) => {
   }
 });
 
+app.get("/api/schedules/:id/:date", async (req, res) => {
+  const id = req.params.id;
+  const schedules = await readSchedules();
+  const result = schedules.find((x) => x.id == id);
+
+  if (result) {
+    const begin = moment.utc(req.params.date).startOf("day");
+    const end = moment.utc(req.params.date).endOf("day");
+
+    const events = result.events.filter((x) => {
+      const eventStart = moment.utc(x.start);
+      return eventStart.isBetween(begin, end);
+    });
+
+    res.send({
+      id: result.id,
+      lastUpdated: getLastUpdated(),
+      events: events,
+    });
+  } else {
+    res.sendStatus(404);
+  }
+});
+
 updateSchedules();
 setInterval(async () => await updateSchedules(), interval);
 
