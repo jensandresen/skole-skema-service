@@ -3,6 +3,7 @@ const ical = require("ical");
 const path = require("path");
 const fs = require("fs");
 const moment = require("moment");
+const { excludeIgnored } = require("./events-utils");
 
 const dataFile = process.env.DATAFILE || path.resolve(__dirname, "./data.json");
 
@@ -80,7 +81,8 @@ function downloadSchedule(fetchUrl) {
     .then(parseEvents)
     .then(extractThisWeekAndNextOnly)
     .then(sort)
-    .then(transform);
+    .then(transform)
+    .then(excludeIgnored);
 }
 
 async function updateSchedules() {

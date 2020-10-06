@@ -17,3 +17,9 @@ run:
 
 teardown:
 	-docker kill $(NAME)
+
+unittests:
+	cd src && npm run unittests
+
+unittests-watch:
+	cd src && npm run unittests:watch
